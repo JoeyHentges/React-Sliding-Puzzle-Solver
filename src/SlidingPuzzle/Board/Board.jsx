@@ -1,43 +1,47 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import Box from './Box';
-import BoardLogic from './BoardLogic';
 import { solveBoard } from '../Algorithm/Solve';
 import { Visualize } from '../Visualize/Visualize';
+import { move, checkBoard, getFinalBoard } from '../Algorithm/Helpers';
 
 class Board extends Component {
   constructor(props) {
     super(props);
-    const boardLogic = new BoardLogic(this.props.size);
-    const board = boardLogic.boardToMatrix(
-      boardLogic.scramble(boardLogic.board)
+    const newBoard = Array.from(
+      { length: this.props.size * this.props.size },
+      (_, b) => b
     );
+    const newBoardMatrix = boardToMatrix(newBoard);
     this.state = {
-      boardLogic,
-      board,
+      board: newBoardMatrix,
       size: this.props.size,
       moves: 0,
-      isWin: boardLogic.checkWin(board)
+      isWin: checkBoard(newBoard, getFinalBoard(newBoard.length))
     };
   }
 
   newGame = () => {
-    this.state.boardLogic.newBoard(this.props.size);
+    const newBoard = Array.from(
+      { length: this.props.size * this.props.size },
+      (_, b) => b
+    );
+    const newBoardMatrix = boardToMatrix(newBoard);
     this.setState({
-      board: this.state.boardLogic.matrix,
+      board: newBoardMatrix,
       size: this.props.size,
       moves: 0,
-      isWin: this.state.boardLogic.checkWin(this.state.boardLogic.board)
+      isWin: checkBoard(newBoard, getFinalBoard(newBoard.length))
     });
   };
 
   changeBoardSize = newSize => {
-    this.state.boardLogic.newBoard(newSize);
+    const newBoard = Array.from({ length: newSize * newSize }, (_, b) => b);
+    const newBoardMatrix = boardToMatrix(newBoard);
     this.setState({
-      board: this.state.boardLogic.matrix,
+      board: newBoardMatrix,
       size: newSize,
       moves: 0,
-      isWin: this.state.boardLogic.checkWin(this.state.boardLogic.board)
+      isWin: checkBoard(newBoard, getFinalBoard(newBoard.length))
     });
   };
 
@@ -45,11 +49,11 @@ class Board extends Component {
   // in y, x
   move = (column, row) => {
     if (this.state.isWin) return;
-    const newBoard = this.state.boardLogic.move(this.state.board, row, column);
+    const newBoard = move(this.state.board, row, column);
     this.setState(prevState => ({
       board: newBoard,
       moves: prevState.moves + 1,
-      isWin: this.state.boardLogic.checkWin(newBoard)
+      isWin: checkBoard(newBoard, getFinalBoard(newBoard.length))
     }));
   };
 
@@ -86,7 +90,7 @@ class Board extends Component {
   };
 
   solve = () => {
-    const temp = solveBoard(this.state.boardLogic);
+    const temp = solveBoard(this.state.board);
     console.log(temp);
     //const { moves } = solveBoard(this.state.boardLogic.board);
     //Visualize(this, moves);
@@ -99,6 +103,7 @@ class Board extends Component {
   };
 
   render() {
+    console.log(this.state);
     let rows = this.state.board.map(this.getRow);
     let message =
       (this.state.isWin ? 'Winner !!! ' : 'Total ') +
@@ -135,3 +140,18 @@ class Board extends Component {
 }
 
 export default Board;
+
+const boardToMatrix = board => {
+  const rowColLength = Math.sqrt(board.length, 2);
+  const matrix = [];
+  let count = 0;
+  for (let row = 0; row < rowColLength; row += 1) {
+    const currRow = [];
+    for (let column = 0; column < rowColLength; column += 1) {
+      currRow.push(board[count]);
+      count += 1;
+    }
+    matrix.push(currRow);
+  }
+  return matrix;
+};

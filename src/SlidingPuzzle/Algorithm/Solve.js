@@ -7,9 +7,7 @@ import {
   checkBoard
 } from './Helpers';
 
-export function solveBoard(BoardLogic) {
-  const board = BoardLogic.matrix;
-  console.log(BoardLogic.board);
+export function solveBoard(board) {
   console.log(board);
   const finalBoard = getFinalBoard(board.length);
   let currentBoard = board.slice(0);
