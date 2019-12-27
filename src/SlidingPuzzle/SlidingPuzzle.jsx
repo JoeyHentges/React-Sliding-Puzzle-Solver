@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import './SlidingPuzzle.css';
+import App from './Board/App';
 
 export default class SlidingPizzle extends Component {
   constructor(props) {
@@ -10,8 +11,8 @@ export default class SlidingPizzle extends Component {
 
   render() {
     return (
-      <div>
-        <p className="node-number">hi</p>
+      <div className="board">
+        <App size={4} solve={this.solve}></App>
       </div>
     );
   }
