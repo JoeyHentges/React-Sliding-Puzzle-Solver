@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Box from './Box';
 import BoardLogic from './BoardLogic';
+import { solveBoard } from '../Algorithm/Solve';
 class Board extends Component {
   static defaultProps = {
     size: 3,
@@ -17,10 +18,6 @@ class Board extends Component {
 
   initialGameState = () => {
     this.boardLogic = new BoardLogic(this.props.data || this.props.size);
-    console.log(this.props.data);
-    console.log(
-      this.props.data ? this.boardLogic.matrix : this.boardLogic.scramble()
-    );
     return {
       board: this.props.data
         ? this.boardLogic.matrix
@@ -37,11 +34,14 @@ class Board extends Component {
       board: this.props.data
         ? this.boardLogic.matrix
         : this.boardLogic.scramble(),
-      size: newSize
+      size: newSize,
+      moves: 0,
+      isWin: this.boardLogic.checkWin()
     });
   };
 
   //note declaring class function as an arrow function gives us automatic 'this' binding.
+  // in y, x
   move = (i, j) => {
     if (this.state.isWin) return;
 
@@ -75,7 +75,8 @@ class Board extends Component {
   };
 
   solve = () => {
-    this.changeBoardSize(6);
+    //this.move(2 - 1, 3 - 1);
+    solveBoard(this.state.board);
   };
 
   changeSize = amount => {
