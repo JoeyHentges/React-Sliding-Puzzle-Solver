@@ -1,4 +1,5 @@
 import {
+  toMatrix,
   getFinalBoard,
   move,
   getNeighbors,
@@ -6,7 +7,9 @@ import {
   checkBoard
 } from './Helpers';
 
-export function solveBoard(board) {
+export function solveBoard(BoardLogic) {
+  const board = BoardLogic.matrix;
+  console.log(BoardLogic.board);
   console.log(board);
   const finalBoard = getFinalBoard(board.length);
   let currentBoard = board.slice(0);

@@ -5,20 +5,12 @@ import BoardLogic from './BoardLogic';
 import { solveBoard } from '../Algorithm/Solve';
 import { Visualize } from '../Visualize/Visualize';
 
-const boardLogic = new BoardLogic();
-
 class Board extends Component {
-  static defaultProps = {
-    size: 3,
-    onMove: (i, j) => {
-      console.log(`Clicked tile ${i},${j}`);
-    }
-  };
-
   constructor(props) {
     super(props);
+    const boardLogic = new BoardLogic(this.props.size);
     const board = boardLogic.boardToMatrix(
-      boardLogic.scramble(boardLogic.initBoard(this.props.size))
+      boardLogic.scramble(boardLogic.board)
     );
     this.state = {
       boardLogic,
@@ -30,28 +22,22 @@ class Board extends Component {
   }
 
   newGame = () => {
-    const boardLogic = new BoardLogic();
-    const board = boardLogic.boardToMatrix(
-      boardLogic.scramble(boardLogic.initBoard(this.props.size))
-    );
+    this.state.boardLogic.newBoard(this.props.size);
     this.setState({
-      board,
+      board: this.state.boardLogic.matrix,
       size: this.props.size,
       moves: 0,
-      isWin: boardLogic.checkWin(board)
+      isWin: this.state.boardLogic.checkWin(this.state.boardLogic.board)
     });
   };
 
   changeBoardSize = newSize => {
-    const boardLogic = new BoardLogic();
-    const board = boardLogic.boardToMatrix(
-      boardLogic.scramble(boardLogic.initBoard(newSize))
-    );
+    this.state.boardLogic.newBoard(newSize);
     this.setState({
-      board,
+      board: this.state.boardLogic.matrix,
       size: newSize,
       moves: 0,
-      isWin: boardLogic.checkWin(board)
+      isWin: this.state.boardLogic.checkWin(this.state.boardLogic.board)
     });
   };
 
@@ -59,13 +45,11 @@ class Board extends Component {
   // in y, x
   move = (column, row) => {
     if (this.state.isWin) return;
-    console.log(column, row);
-    this.props.onMove(row, column);
-    const newBoard = boardLogic.move(this.state.board, row, column);
+    const newBoard = this.state.boardLogic.move(this.state.board, row, column);
     this.setState(prevState => ({
       board: newBoard,
       moves: prevState.moves + 1,
-      isWin: boardLogic.checkWin(newBoard)
+      isWin: this.state.boardLogic.checkWin(newBoard)
     }));
   };
 
@@ -102,8 +86,10 @@ class Board extends Component {
   };
 
   solve = () => {
-    const { moves } = solveBoard(this.state.board);
-    Visualize(this, moves);
+    const temp = solveBoard(this.state.boardLogic);
+    console.log(temp);
+    //const { moves } = solveBoard(this.state.boardLogic.board);
+    //Visualize(this, moves);
   };
 
   changeSize = amount => {

@@ -1,5 +1,21 @@
 const EMPTY = 0;
 
+export function toMatrix(list) {
+  var matrix = [],
+    i,
+    k;
+  const elementsPerSubArray = Math.sqrt(list.length, 2);
+
+  for (i = 0, k = -1; i < list.length; i++) {
+    if (i % elementsPerSubArray === 0) {
+      k++;
+      matrix[k] = [];
+    }
+    matrix[k].push(list[i]);
+  }
+  return matrix;
+}
+
 export function checkBoard(board, finalBoard) {
   for (let row = 0; row < board.length; row += 1) {
     for (let column = 0; column < board.length; column += 1) {

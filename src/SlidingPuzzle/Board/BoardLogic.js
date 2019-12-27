@@ -1,6 +1,12 @@
 import { getFinalBoard, move, checkBoard } from '../Algorithm/Helpers';
 
 export default class BoardLogic {
+  constructor(size) {
+    const board = this.scramble(this.initBoard(size));
+    this.board = board;
+    this.matrix = this.boardToMatrix(board);
+  }
+
   /**
    * Gets a new board of the given size
    * @param {Number} size amount of Boxes per row
@@ -9,7 +15,18 @@ export default class BoardLogic {
     return Array.from({ length: size * size }, (_, b) => b);
   }
 
-  boardToMatrix(board) {
+  newBoard(size) {
+    const board = this.scramble(this.initBoard(size));
+    this.board = board;
+    this.matrix = this.boardToMatrix(board);
+  }
+
+  boardToMatrix() {
+    //const size = Math.sqrt(this.board.size, 2);
+    const board = this.board;
+    console.log(board);
+    //return this.board;
+
     const rowColLength = Math.sqrt(board.length, 2);
     const matrix = [];
     let count = 0;
