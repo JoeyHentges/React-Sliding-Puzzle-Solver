@@ -10,26 +10,17 @@ export function solveBoard(board) {
   console.log(board);
   const finalBoard = getFinalBoard(board.length);
   let currentBoard = board.slice(0);
-  let comp = 1;
   const moves = [];
-  while (!checkBoard(currentBoard, finalBoard) && comp < 10000000) {
-    //console.log(currentBoard);
+  let count = 0;
+  while (!checkBoard(currentBoard, finalBoard) && count < 100) {
     const random = getRandomXY(currentBoard, findOpenBox(currentBoard));
-    //console.log(random);
     currentBoard = move(currentBoard, random.row, random.column);
-    //console.log(currentBoard);
-    //console.log('\n');
-    comp += 1;
     moves.push({ row: random.row, column: random.column });
+    count += 1;
   }
-
-  console.log('done');
-  //console.log(moves);
-  console.log(checkBoard(currentBoard, finalBoard));
-  console.log(currentBoard);
   return {
     board: currentBoard,
-    move,
+    moves,
     numberMoves: moves.length
   };
 }

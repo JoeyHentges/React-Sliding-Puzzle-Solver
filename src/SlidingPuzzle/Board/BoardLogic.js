@@ -1,17 +1,4 @@
-import {
-  getFinalBoard,
-  move,
-  getNeighbors,
-  findOpenBox,
-  checkBoard
-} from '../Algorithm/Helpers';
-
-const EMPTY = 0;
-Array.prototype.swap = function(i, j) {
-  // eslint-disable-line no-extend-native
-  [this[i], this[j]] = [this[j], this[i]];
-  return this;
-};
+import { getFinalBoard, move, checkBoard } from '../Algorithm/Helpers';
 
 export default class BoardLogic {
   /**
@@ -59,23 +46,5 @@ export default class BoardLogic {
    */
   scramble(board) {
     return board.sort(() => Math.random() - 0.5);
-  }
-
-  /**
-   * Gets all existing tiles around a given tile (i,j)
-   * @param {Number} i
-   * @param {Number} j
-   */
-  getLegalFriends(board, i, j) {
-    const size = Math.sqrt(board.length, 2);
-    let friends = [
-      { i: i + 1, j },
-      { i: i - 1, j },
-      { i, j: j + 1 },
-      { i, j: j - 1 }
-    ];
-    // ES6 feature :  Arrow functions + Destructing assignment
-    let isLegal = ({ i, j }) => i < size && i >= 0 && j < size && j >= 0;
-    return friends.filter(isLegal);
   }
 }

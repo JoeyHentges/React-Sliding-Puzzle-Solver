@@ -14,7 +14,6 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          Slider Puzzle Solver
           <Board size={size} />
         </header>
       </div>
