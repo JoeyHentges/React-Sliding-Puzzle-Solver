@@ -1,16 +1,60 @@
-import { getFinalBoard, move, getNeighbors } from './Helpers';
+import {
+  getFinalBoard,
+  move,
+  getNeighbors,
+  findOpenBox,
+  checkBoard
+} from './Helpers';
 
 const EMPTY = 0;
 
 export function solveBoard(board) {
+  //console.log(board, bugBoard);
+  //console.log(board === bugBoard);
   const finalBoard = getFinalBoard(board.length);
-  console.log(board[2][3]);
-  console.log(move(board, 2, 3));
+  let currentBoard = board;
+  //console.log(board[2][3]);
+  //console.log(move(board, 2, 3));
+  //console.log(findOpenBox(board));
+  //console.log(getRandomXY(board, findOpenBox(board)));
   //console.log(finalBoard);
-  const temp = getNeighbors(board, 2, 2);
+  //const temp = getNeighbors(board, 2, 2);
   //console.log(board[2][2]);
   //console.log(temp);
+  //console.log(board);
+  /*
+  console.log(currentBoard);
+  const random = getRandomXY(currentBoard, findOpenBox(currentBoard));
+  console.log(random);
+  currentBoard = move(currentBoard, random.row, random.column);
+  console.log(currentBoard);
+  */
+  let comp = 1;
+  while (!checkBoard(currentBoard, finalBoard) && comp < 5) {
+    console.log(currentBoard);
+    const random = getRandomXY(currentBoard, findOpenBox(currentBoard));
+    console.log(random);
+    currentBoard = move(currentBoard, random.row, random.column);
+    console.log(currentBoard);
+    console.log('\n');
+    comp += 1;
+    /*
+    setTimeout(() => {
+      console.log(currentBoard);
+      const random = getRandomXY(currentBoard, findOpenBox(currentBoard));
+      currentBoard = move(currentBoard, random.row, random.column);
+      console.log(currentBoard);
+    }, 500);
+    */
+  }
+  console.log('done');
   const seenBoard = [];
+}
+
+function getRandomXY(board, { row, column }) {
+  const neighbors = getNeighbors(board, row, column);
+  //console.log(neighbors);
+  return neighbors[Math.floor(Math.random() * neighbors.length)];
 }
 
 function BreadthFirstSearch(grid, startNode) {

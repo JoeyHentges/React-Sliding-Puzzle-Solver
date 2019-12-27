@@ -3,6 +3,9 @@ import PropTypes from 'prop-types';
 import Box from './Box';
 import BoardLogic from './BoardLogic';
 import { solveBoard } from '../Algorithm/Solve';
+
+const boardLogic = new BoardLogic();
+
 class Board extends Component {
   static defaultProps = {
     size: 3,
@@ -13,46 +16,73 @@ class Board extends Component {
 
   constructor(props) {
     super(props);
-    this.state = this.initialGameState();
-  }
-
-  initialGameState = () => {
-    this.boardLogic = new BoardLogic(this.props.data || this.props.size);
-    return {
-      board: this.props.data
-        ? this.boardLogic.matrix
-        : this.boardLogic.scramble(),
+    const board = boardLogic.boardToMatrix(
+      boardLogic.scramble(boardLogic.initBoard(this.props.size))
+    );
+    this.state = {
+      boardLogic,
+      board,
       size: this.props.size,
       moves: 0,
-      isWin: this.boardLogic.checkWin()
+      isWin: boardLogic.checkWin(board)
     };
+  }
+
+  newGame = () => {
+    const boardLogic = new BoardLogic();
+    const board = boardLogic.boardToMatrix(
+      boardLogic.scramble(boardLogic.initBoard(this.props.size))
+    );
+    this.setState({
+      board,
+      size: this.props.size,
+      moves: 0,
+      isWin: boardLogic.checkWin(board)
+    });
   };
 
   changeBoardSize = newSize => {
-    this.boardLogic = new BoardLogic(this.props.data || newSize);
+    const boardLogic = new BoardLogic();
+    const board = boardLogic.boardToMatrix(
+      boardLogic.scramble(boardLogic.initBoard(newSize))
+    );
     this.setState({
-      board: this.props.data
-        ? this.boardLogic.matrix
-        : this.boardLogic.scramble(),
+      board,
       size: newSize,
       moves: 0,
-      isWin: this.boardLogic.checkWin()
+      isWin: boardLogic.checkWin(board)
     });
   };
 
   //note declaring class function as an arrow function gives us automatic 'this' binding.
   // in y, x
-  move = (i, j) => {
+  move = (column, row) => {
     if (this.state.isWin) return;
 
-    if (this.boardLogic.move(i, j)) {
-      this.props.onMove(i, j);
-      this.setState(prevState => ({
-        board: this.boardLogic.matrix,
-        moves: prevState.moves + 1,
-        isWin: this.boardLogic.checkWin()
-      }));
-    }
+    this.props.onMove(row, column);
+    const newBoard = boardLogic.move(this.state.board, row, column);
+    this.setState(prevState => ({
+      board: newBoard,
+      moves: prevState.moves + 1,
+      isWin: boardLogic.checkWin(newBoard)
+    }));
+  };
+
+  /**
+   * returns a single slider row given the row data
+   * @param {Object} rowData row data
+   * @param {Number} i row number
+   */
+  getRows = () => {
+    const board = this.state.board;
+    const j = 0;
+    return (
+      <div key={j}>
+        {board.map((bNum, i) => (
+          <Box key={bNum} boxNumber={bNum} onClick={() => this.move(i, j)} />
+        ))}
+      </div>
+    );
   };
 
   /**
@@ -70,12 +100,8 @@ class Board extends Component {
     );
   };
 
-  newGame = () => {
-    this.setState(this.initialGameState());
-  };
-
   solve = () => {
-    //this.move(2 - 1, 3 - 1);
+    console.log(this.state.board);
     solveBoard(this.state.board);
   };
 
@@ -86,6 +112,8 @@ class Board extends Component {
   };
 
   render() {
+    //let rows = this.getRows();
+    //console.log(rows);
     let rows = this.state.board.map(this.getRow);
     let message =
       (this.state.isWin ? 'Winner !!! ' : 'Total ') +
