@@ -51,10 +51,7 @@ export default class BoardLogic {
    * Checks if board is in win configuration.
    */
   checkWin(board) {
-    let last = board.length - 1;
-    return !!board.reduce(
-      (res, cur, i) => res && (cur === i + 1 || i === last)
-    );
+    return checkBoard(board, getFinalBoard(board.length));
   }
 
   /**

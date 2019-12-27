@@ -6,49 +6,32 @@ import {
   checkBoard
 } from './Helpers';
 
-const EMPTY = 0;
-
 export function solveBoard(board) {
-  //console.log(board, bugBoard);
-  //console.log(board === bugBoard);
+  console.log(board);
   const finalBoard = getFinalBoard(board.length);
-  let currentBoard = board;
-  //console.log(board[2][3]);
-  //console.log(move(board, 2, 3));
-  //console.log(findOpenBox(board));
-  //console.log(getRandomXY(board, findOpenBox(board)));
-  //console.log(finalBoard);
-  //const temp = getNeighbors(board, 2, 2);
-  //console.log(board[2][2]);
-  //console.log(temp);
-  //console.log(board);
-  /*
-  console.log(currentBoard);
-  const random = getRandomXY(currentBoard, findOpenBox(currentBoard));
-  console.log(random);
-  currentBoard = move(currentBoard, random.row, random.column);
-  console.log(currentBoard);
-  */
+  let currentBoard = board.slice(0);
   let comp = 1;
-  while (!checkBoard(currentBoard, finalBoard) && comp < 5) {
-    console.log(currentBoard);
+  const moves = [];
+  while (!checkBoard(currentBoard, finalBoard) && comp < 10000000) {
+    //console.log(currentBoard);
     const random = getRandomXY(currentBoard, findOpenBox(currentBoard));
-    console.log(random);
+    //console.log(random);
     currentBoard = move(currentBoard, random.row, random.column);
-    console.log(currentBoard);
-    console.log('\n');
+    //console.log(currentBoard);
+    //console.log('\n');
     comp += 1;
-    /*
-    setTimeout(() => {
-      console.log(currentBoard);
-      const random = getRandomXY(currentBoard, findOpenBox(currentBoard));
-      currentBoard = move(currentBoard, random.row, random.column);
-      console.log(currentBoard);
-    }, 500);
-    */
+    moves.push({ row: random.row, column: random.column });
   }
+
   console.log('done');
-  const seenBoard = [];
+  //console.log(moves);
+  console.log(checkBoard(currentBoard, finalBoard));
+  console.log(currentBoard);
+  return {
+    board: currentBoard,
+    move,
+    numberMoves: moves.length
+  };
 }
 
 function getRandomXY(board, { row, column }) {

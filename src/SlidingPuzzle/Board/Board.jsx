@@ -101,8 +101,12 @@ class Board extends Component {
   };
 
   solve = () => {
-    console.log(this.state.board);
-    solveBoard(this.state.board);
+    const { board, moves, numberMoves } = solveBoard(this.state.board);
+    this.setState(prevState => ({
+      board: board,
+      moves: prevState.moves + numberMoves,
+      isWin: boardLogic.checkWin(board)
+    }));
   };
 
   changeSize = amount => {
