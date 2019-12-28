@@ -1,0 +1,123 @@
+/* MOVE UP */
+.slider-board div span.move-up {
+  position: relative;
+  -webkit-animation: moveUp 0.5s 2; /* Safari 4.0 - 8.0 */
+  -webkit-animation-direction: alternate; /* Safari 4.0 - 8.0 */
+  animation: moveUp 0.5s 2;
+  animation-direction: alternate;
+}
+
+@-webkit-keyframes moveUp {
+  0% {
+    left: 0px;
+    top: 0px;
+  }
+  100% {
+    left: 0px;
+    top: -62px;
+  }
+}
+
+@keyframes moveUp {
+  0% {
+    left: 0px;
+    top: 0px;
+  }
+  100% {
+    left: 0px;
+    top: -62px;
+  }
+}
+
+/* MOVE DOWN */
+.slider-board div span.move-down {
+  position: relative;
+  -webkit-animation: moveDown 0.5s 2; /* Safari 4.0 - 8.0 */
+  -webkit-animation-direction: alternate; /* Safari 4.0 - 8.0 */
+  animation: moveDown 0.5s 2;
+  animation-direction: alternate;
+}
+
+@-webkit-keyframes moveDown {
+  0% {
+    left: 0px;
+    top: 0px;
+  }
+  100% {
+    left: 0px;
+    top: 62px;
+  }
+}
+
+@keyframes moveDown {
+  0% {
+    left: 0px;
+    top: 0px;
+  }
+  100% {
+    left: 0px;
+    top: 62px;
+  }
+}
+
+/* MOVE LEFT */
+.slider-board div span.move-left {
+  position: relative;
+  -webkit-animation: moveLeft 0.5s 2; /* Safari 4.0 - 8.0 */
+  -webkit-animation-direction: alternate; /* Safari 4.0 - 8.0 */
+  animation: moveLeft 0.5s 2;
+  animation-direction: alternate;
+}
+
+@-webkit-keyframes moveLeft {
+  0% {
+    left: 0px;
+    top: 0px;
+  }
+  100% {
+    left: 76px;
+    top: 0px;
+  }
+}
+
+@keyframes moveLeft {
+  0% {
+    left: 0px;
+    top: 0px;
+  }
+  100% {
+    left: 76px;
+    top: 0px;
+  }
+}
+
+/* MOVE RIGHT */
+.slider-board div span.move-right {
+  position: relative;
+  -webkit-animation: moveRight 0.5s 2; /* Safari 4.0 - 8.0 */
+  -webkit-animation-direction: alternate; /* Safari 4.0 - 8.0 */
+  animation: moveRight 0.5s 2;
+  animation-direction: alternate;
+}
+
+@-webkit-keyframes moveRight {
+  0% {
+    left: 0px;
+    top: 0px;
+  }
+  100% {
+    left: -76px;
+    top: 0px;
+  }
+}
+
+@keyframes moveRight {
+  0% {
+    left: 0px;
+    top: 0px;
+  }
+  100% {
+    left: -76px;
+    top: 0px;
+  }
+}

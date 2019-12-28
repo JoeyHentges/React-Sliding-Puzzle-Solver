@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import './BoxAnimation.css';
 import Puzzle from './Puzzle';
 
 class App extends Component {
