@@ -1,6 +1,11 @@
 import { findOpenBox } from '../Algorithm/Helpers';
 
 export function Visualize(SliderPuzzle, moves) {
+  if (!SliderPuzzle.state.animation) {
+    VisualizeNoAnimation(SliderPuzzle, moves);
+    return;
+  }
+
   const open = findOpenBox(SliderPuzzle.state.board.getMatrix());
   let pastMove = { row: open.row, column: open.column };
   for (let i = 0; i < moves.length; i += 1) {
@@ -28,6 +33,15 @@ export function Visualize(SliderPuzzle, moves) {
     }, 1000 * i);
   }
 }
+
+const VisualizeNoAnimation = (SliderPuzzle, moves) => {
+  for (let i = 0; i < moves.length; i += 1) {
+    const { row, column } = moves[i];
+    setTimeout(() => {
+      SliderPuzzle.move(column, row);
+    }, SliderPuzzle.state.animationSpeed * i);
+  }
+};
 
 const getDirection = (currentRow, currentColumn, newRow, newColumn) => {
   if (currentRow < newRow) {
