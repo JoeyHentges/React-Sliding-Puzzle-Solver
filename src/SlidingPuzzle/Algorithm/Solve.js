@@ -1,5 +1,4 @@
 import {
-  toMatrix,
   getFinalBoard,
   move,
   getNeighbors,
@@ -8,27 +7,27 @@ import {
 } from './Helpers';
 
 export function solveBoard(board) {
-  console.log(board);
   const finalBoard = getFinalBoard(board.length);
-  let currentBoard = board.slice(0);
   const moves = [];
   let count = 0;
-  while (!checkBoard(currentBoard, finalBoard) && count < 100) {
+  let currentBoard = board.slice();
+
+  while (!checkBoard(currentBoard, finalBoard) && count < 1000000) {
     const random = getRandomXY(currentBoard, findOpenBox(currentBoard));
     currentBoard = move(currentBoard, random.row, random.column);
     moves.push({ row: random.row, column: random.column });
     count += 1;
   }
-  return {
-    board: currentBoard,
-    moves,
-    numberMoves: moves.length
-  };
+  console.log(checkBoard(currentBoard, finalBoard), currentBoard);
+  console.log('done');
+  if (!checkBoard(currentBoard, finalBoard)) {
+    return [];
+  }
+  return moves;
 }
 
 function getRandomXY(board, { row, column }) {
   const neighbors = getNeighbors(board, row, column);
-  //console.log(neighbors);
   return neighbors[Math.floor(Math.random() * neighbors.length)];
 }
 

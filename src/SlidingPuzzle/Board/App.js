@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import Board from './Board';
+import Puzzle from './Puzzle';
 
 class App extends Component {
   constructor(props) {
@@ -14,7 +14,7 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <Board size={size} />
+          <Puzzle size={size} />
         </header>
       </div>
     );
