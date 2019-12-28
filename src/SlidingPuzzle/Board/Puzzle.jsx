@@ -14,11 +14,13 @@ class Puzzle extends Component {
       isWin: checkBoard(board.getMatrix(), getFinalBoard(board.size)),
       //animation true false - slows algorithm solving if true
       animation: false,
-      animationSpeed: 100 // only matters if flase - if true, animation speed it fixed
+      animationSpeed: 100, // only matters if flase - if true, animation speed it fixed
+      animationActive: false
     };
   }
 
   newGame = () => {
+    if (this.state.animationActive) return;
     const board = new Board(this.props.size);
     this.setState({
       board,
@@ -28,6 +30,7 @@ class Puzzle extends Component {
   };
 
   changeBoardSize = amount => {
+    if (this.state.animationActive) return;
     const newSize = this.state.board.size + amount;
     if (newSize < 3 || newSize > 10) return;
     const board = new Board(newSize);
@@ -40,7 +43,8 @@ class Puzzle extends Component {
 
   //note declaring class function as an arrow function gives us automatic 'this' binding.
   // in y, x
-  move = (column, row) => {
+  move = (column, row, clickType) => {
+    if (clickType === 'manuial' && this.state.animationActive) return;
     if (this.state.isWin) return;
 
     const newMoveInfo = this.state.board.makeMove(row, column);
@@ -70,7 +74,7 @@ class Puzzle extends Component {
             boxNumber={bNum}
             row={j}
             column={i}
-            onClick={() => this.move(i, j)}
+            onClick={() => this.move(i, j, 'manual')}
           />
         ))}
       </div>
@@ -78,6 +82,8 @@ class Puzzle extends Component {
   };
 
   solve = () => {
+    if (this.state.animationActive) return;
+    this.setState({ animationActive: true });
     const boardCopy = this.state.board.getMatrix();
     Run(this, boardCopy, 'BruteForce');
   };

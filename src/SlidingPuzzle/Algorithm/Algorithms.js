@@ -12,4 +12,5 @@ export function Run(Puzzle, board, algorithm) {
       break;
   }
   if (moves.length > 0) Visualize(Puzzle, moves);
+  else Puzzle.setState({ animationActive: false });
 }

@@ -5,7 +5,6 @@ export function Visualize(SliderPuzzle, moves) {
     VisualizeNoAnimation(SliderPuzzle, moves);
     return;
   }
-
   const open = findOpenBox(SliderPuzzle.state.board.getMatrix());
   let pastMove = { row: open.row, column: open.column };
   for (let i = 0; i < moves.length; i += 1) {
@@ -32,6 +31,9 @@ export function Visualize(SliderPuzzle, moves) {
       }, 500);
     }, 1000 * i);
   }
+  setTimeout(() => {
+    SliderPuzzle.setState({ animationActive: false });
+  }, 1000 * moves.length);
 }
 
 const VisualizeNoAnimation = (SliderPuzzle, moves) => {
@@ -41,6 +43,9 @@ const VisualizeNoAnimation = (SliderPuzzle, moves) => {
       SliderPuzzle.move(column, row);
     }, SliderPuzzle.state.animationSpeed * i);
   }
+  setTimeout(() => {
+    SliderPuzzle.setState({ animationActive: false });
+  }, SliderPuzzle.state.animationSpeed * moves.length);
 };
 
 const getDirection = (currentRow, currentColumn, newRow, newColumn) => {
