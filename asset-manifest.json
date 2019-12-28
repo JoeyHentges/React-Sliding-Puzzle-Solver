@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/React-Sliding-Puzzle-Solver/static/css/main.3fd4c371.chunk.css",
-    "main.js": "/React-Sliding-Puzzle-Solver/static/js/main.377fb30f.chunk.js",
-    "main.js.map": "/React-Sliding-Puzzle-Solver/static/js/main.377fb30f.chunk.js.map",
+    "main.css": "/React-Sliding-Puzzle-Solver/static/css/main.b1ff6285.chunk.css",
+    "main.js": "/React-Sliding-Puzzle-Solver/static/js/main.7238ebb1.chunk.js",
+    "main.js.map": "/React-Sliding-Puzzle-Solver/static/js/main.7238ebb1.chunk.js.map",
     "runtime-main.js": "/React-Sliding-Puzzle-Solver/static/js/runtime-main.36c6ff53.js",
     "runtime-main.js.map": "/React-Sliding-Puzzle-Solver/static/js/runtime-main.36c6ff53.js.map",
-    "static/js/2.45e47d37.chunk.js": "/React-Sliding-Puzzle-Solver/static/js/2.45e47d37.chunk.js",
-    "static/js/2.45e47d37.chunk.js.map": "/React-Sliding-Puzzle-Solver/static/js/2.45e47d37.chunk.js.map",
+    "static/js/2.a0b80519.chunk.js": "/React-Sliding-Puzzle-Solver/static/js/2.a0b80519.chunk.js",
+    "static/js/2.a0b80519.chunk.js.map": "/React-Sliding-Puzzle-Solver/static/js/2.a0b80519.chunk.js.map",
     "index.html": "/React-Sliding-Puzzle-Solver/index.html",
-    "precache-manifest.83cc4ef8d09f6a9e7aadb3b33f56b20d.js": "/React-Sliding-Puzzle-Solver/precache-manifest.83cc4ef8d09f6a9e7aadb3b33f56b20d.js",
+    "precache-manifest.dbc60ea3bef4942f47fc575dd1da9122.js": "/React-Sliding-Puzzle-Solver/precache-manifest.dbc60ea3bef4942f47fc575dd1da9122.js",
     "service-worker.js": "/React-Sliding-Puzzle-Solver/service-worker.js",
-    "static/css/main.3fd4c371.chunk.css.map": "/React-Sliding-Puzzle-Solver/static/css/main.3fd4c371.chunk.css.map",
-    "static/js/2.45e47d37.chunk.js.LICENSE": "/React-Sliding-Puzzle-Solver/static/js/2.45e47d37.chunk.js.LICENSE"
+    "static/css/main.b1ff6285.chunk.css.map": "/React-Sliding-Puzzle-Solver/static/css/main.b1ff6285.chunk.css.map",
+    "static/js/2.a0b80519.chunk.js.LICENSE": "/React-Sliding-Puzzle-Solver/static/js/2.a0b80519.chunk.js.LICENSE"
   },
   "entrypoints": [
     "static/js/runtime-main.36c6ff53.js",
-    "static/js/2.45e47d37.chunk.js",
-    "static/css/main.3fd4c371.chunk.css",
-    "static/js/main.377fb30f.chunk.js"
+    "static/js/2.a0b80519.chunk.js",
+    "static/css/main.b1ff6285.chunk.css",
+    "static/js/main.7238ebb1.chunk.js"
   ]
 }
