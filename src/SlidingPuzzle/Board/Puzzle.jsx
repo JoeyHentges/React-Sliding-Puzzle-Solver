@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import Box from './Box';
 import { Run } from '../Algorithm/Algorithms';
-import { Visualize } from '../Visualize/Visualize';
-import { move, checkBoard, getFinalBoard } from '../Algorithm/Helpers';
+import { checkBoard, getFinalBoard } from '../Algorithm/Helpers';
 import Board from './Board';
 
 class Puzzle extends Component {
@@ -25,7 +24,9 @@ class Puzzle extends Component {
     });
   };
 
-  changeBoardSize = newSize => {
+  changeBoardSize = amount => {
+    const newSize = this.state.board.size + amount;
+    if (newSize < 3 || newSize > 10) return;
     const board = new Board(newSize);
     this.setState({
       board,
@@ -38,7 +39,6 @@ class Puzzle extends Component {
   // in y, x
   move = (column, row) => {
     if (this.state.isWin) return;
-
     this.state.board.makeMove(row, column);
     this.setState(prevState => ({
       moves: prevState.moves + 1,
@@ -69,11 +69,6 @@ class Puzzle extends Component {
     Run(this, boardCopy, 'BruteForce');
   };
 
-  changeSize = amount => {
-    const newSize = this.state.board.size + amount;
-    if (newSize > 2 && newSize < 11) this.changeBoardSize(newSize);
-  };
-
   render() {
     let rows = this.state.board.getMatrix().map(this.getRow);
     let message =
@@ -91,14 +86,14 @@ class Puzzle extends Component {
             <button onClick={this.solve}>Solve</button>
             <button
               onClick={() => {
-                this.changeSize(1);
+                this.changeBoardSize(1);
               }}
             >
               +
             </button>
             <button
               onClick={() => {
-                this.changeSize(-1);
+                this.changeBoardSize(-1);
               }}
             >
               -
