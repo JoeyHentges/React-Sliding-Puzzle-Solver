@@ -5,6 +5,6 @@ export function Visualize(SliderPuzzle, moves) {
       const { row, column } = moves[count];
       SliderPuzzle.move(row, column);
       count += 1;
-    }, 100 * i);
+    }, 1000 * i);
   }
 }
