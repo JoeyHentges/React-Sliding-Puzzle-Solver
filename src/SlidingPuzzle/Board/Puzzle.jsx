@@ -39,14 +39,18 @@ class Puzzle extends Component {
   // in y, x
   move = (column, row) => {
     if (this.state.isWin) return;
-    this.state.board.makeMove(row, column);
-    this.setState(prevState => ({
-      moves: prevState.moves + 1,
-      isWin: checkBoard(
-        this.state.board.getMatrix(),
-        getFinalBoard(this.state.board.size)
-      )
-    }));
+
+    const newMoveInfo = this.state.board.makeMove(row, column);
+    if (newMoveInfo.newRow !== null) {
+      this.state.board.setBoard(newMoveInfo.board);
+      this.setState(prevState => ({
+        moves: prevState.moves + 1,
+        isWin: checkBoard(
+          this.state.board.getMatrix(),
+          getFinalBoard(this.state.board.size)
+        )
+      }));
+    }
   };
 
   /**
@@ -58,7 +62,13 @@ class Puzzle extends Component {
     return (
       <div key={j}>
         {rowData.map((bNum, i) => (
-          <Box key={bNum} boxNumber={bNum} onClick={() => this.move(i, j)} />
+          <Box
+            key={bNum}
+            boxNumber={bNum}
+            row={j}
+            column={i}
+            onClick={() => this.move(i, j)}
+          />
         ))}
       </div>
     );

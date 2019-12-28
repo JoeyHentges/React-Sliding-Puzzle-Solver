@@ -12,7 +12,7 @@ export function BruteForce(board) {
   let count = 0;
   let currentBoard = board.slice();
 
-  while (!checkBoard(currentBoard, finalBoard) && count < 100) {
+  while (!checkBoard(currentBoard, finalBoard) && count < 20) {
     const random = getRandomXY(currentBoard, findOpenBox(currentBoard));
     currentBoard = move(currentBoard, random.row, random.column);
     moves.push({ row: random.row, column: random.column });

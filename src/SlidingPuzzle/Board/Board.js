@@ -28,10 +28,13 @@ export default class Board {
     return scramble(Array.from({ length: size * size }, (_, b) => b));
   }
 
-  makeMove(row, column) {
-    const newBoard = move(this.getMatrix(), row, column);
-    this.board = matrixToBoard(newBoard);
-    this.matrix = newBoard;
+  makeMove(newRow, newColumn) {
+    return move(this.getMatrix(), newRow, newColumn);
+  }
+
+  setBoard(matrix) {
+    this.board = matrixToBoard(matrix);
+    this.matrix = matrix;
   }
 }
 
@@ -80,10 +83,18 @@ const move = (board, row, column) => {
   for (let i = 0; i < legalFriends.length; i += 1) {
     const box = legalFriends[i];
     if (box.value === EMPTY) {
-      return moveHelper(board, box, row, column);
+      return {
+        board: moveHelper(board, box, row, column),
+        row: box.row,
+        column: box.column
+      };
     }
   }
-  return board;
+  return {
+    board,
+    newRow: null,
+    newColumn: null
+  };
 };
 
 const moveHelper = (board, zero, row, column) => {
