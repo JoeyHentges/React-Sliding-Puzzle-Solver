@@ -14,7 +14,7 @@ class Puzzle extends Component {
       isWin: checkBoard(board.getMatrix(), getFinalBoard(board.size)),
       //animation true false - slows algorithm solving if true
       animation: false,
-      animationSpeed: 100, // only matters if flase - if true, animation speed it fixed
+      animationSpeed: 10, // only matters if flase - if true, animation speed it fixed
       animationActive: false
     };
   }
@@ -121,7 +121,7 @@ class Puzzle extends Component {
           </span>
           <div>
             <button
-              class="speed-change-btn"
+              className="speed-change-btn"
               onClick={() => {
                 this.setState(prevState => ({
                   animationSpeed:
@@ -136,7 +136,7 @@ class Puzzle extends Component {
               Increase
             </button>
             <button
-              class="speed-change-btn"
+              className="speed-change-btn"
               onClick={() => {
                 this.setState(prevState => ({
                   animation: !prevState.animation
@@ -146,7 +146,7 @@ class Puzzle extends Component {
               Animation Active: {this.state.animation.toString().toUpperCase()}
             </button>
             <button
-              class="speed-change-btn"
+              className="speed-change-btn"
               onClick={() => {
                 this.setState(prevState => ({
                   animationSpeed:
