@@ -1,22 +1,27 @@
 import { Visualize } from '../Visualize/Visualize';
 import { BreadthFirstSearch } from './BreadthFirstSearch';
+import { getFinalBoard } from './Helpers';
 
 export function Run(Puzzle, board, algorithm) {
   let moves = [];
+  const finalBoard = getFinalBoard(board.length);
   switch (algorithm) {
     case 'BreadthFirstSearch':
-      moves = BreadthFirstSearch(board);
+      moves = BreadthFirstSearch(board, finalBoard);
       break;
     default:
       console.log('no algorithm');
       break;
   }
 
-  console.log(moves);
   if (moves.length > 0) {
     moves = convertMoves(moves);
+    console.log(moves);
     Visualize(Puzzle, moves);
-  } else Puzzle.setState({ animationActive: false });
+  } else {
+    document.getElementById('algorithm-result').innerHTML = 'No Solution Found';
+    Puzzle.setState({ animationActive: false });
+  }
 }
 
 // convert the given list of 'moves' to x/y coordinates

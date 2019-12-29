@@ -11,7 +11,7 @@ class Puzzle extends Component {
     this.state = {
       board,
       moves: 0,
-      isWin: checkBoard(board.getMatrix(), getFinalBoard(board.size)),
+      isWin: checkBoard(board.getBoard(), getFinalBoard(board.board.length)),
       //animation true false - slows algorithm solving if true
       animation: false,
       animationSpeed: 10, // only matters if flase - if true, animation speed it fixed
@@ -20,16 +20,18 @@ class Puzzle extends Component {
   }
 
   newGame = () => {
+    document.getElementById('algorithm-result').innerHTML = '';
     if (this.state.animationActive) return;
     const board = new Board(this.props.size);
     this.setState({
       board,
       moves: 0,
-      isWin: checkBoard(board.getMatrix(), getFinalBoard(board.size))
+      isWin: checkBoard(board.getBoard(), getFinalBoard(board.board.length))
     });
   };
 
   changeBoardSize = amount => {
+    document.getElementById('algorithm-result').innerHTML = '';
     if (this.state.animationActive) return;
     const newSize = this.state.board.size + amount;
     if (newSize < 3 || newSize > 10) return;
@@ -37,7 +39,7 @@ class Puzzle extends Component {
     this.setState({
       board,
       moves: 0,
-      isWin: checkBoard(board.getMatrix(), getFinalBoard(board.size))
+      isWin: checkBoard(board.getBoard(), getFinalBoard(board.board.length))
     });
   };
 
@@ -53,8 +55,8 @@ class Puzzle extends Component {
       this.setState(prevState => ({
         moves: prevState.moves + 1,
         isWin: checkBoard(
-          this.state.board.getMatrix(),
-          getFinalBoard(this.state.board.size)
+          this.state.board.getBoard(),
+          getFinalBoard(this.state.board.board.length)
         )
       }));
     }
@@ -97,6 +99,7 @@ class Puzzle extends Component {
         .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}`;
     return (
       <>
+        <span className="slider-msg-3" id="algorithm-result"></span>
         Slider Puzzle Solver {this.state.board.size}x{this.state.board.size}
         <div className="slider-board">
           {rows}

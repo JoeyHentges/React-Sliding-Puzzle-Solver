@@ -12,13 +12,14 @@ export default class Node {
    */
 
   // constructor
-  constructor(board, parent, moveAmount) {
+  constructor(board, finalBoard, parent, moveAmount) {
     this.children = [];
     this.parent = parent;
     this.columns = Math.sqrt(board.length, 2);
     this.moveAmount = moveAmount;
     // set the board of this node - make a copy
     this.board = [];
+    this.finalBoard = finalBoard;
     this.setBoard(board);
   }
 
@@ -37,18 +38,7 @@ export default class Node {
    * -- if true, the board is solved
    */
   isGoal() {
-    /*
-    let current = this.board[0];
-
-    for (let i = 0; i < this.board.length; i += 1) {
-      if (current > this.board[i]) {
-        return false;
-      }
-      current = this.board[i];
-    }
-    return true;
-    */
-    return checkBoard(this.board);
+    return checkBoard(this.board, this.finalBoard);
   }
 
   /**
@@ -113,7 +103,7 @@ export default class Node {
       newBoard[index + 1] = newBoard[index];
       newBoard[index] = temp;
 
-      let childNode = new Node(newBoard, this, 1);
+      let childNode = new Node(newBoard, this.finalBoard, this, 1);
       this.children.push(childNode);
     }
   }
@@ -128,7 +118,7 @@ export default class Node {
       newBoard[index - 1] = newBoard[index];
       newBoard[index] = temp;
 
-      let childNode = new Node(newBoard, this, -1);
+      let childNode = new Node(newBoard, this.finalBoard, this, -1);
       this.children.push(childNode);
     }
   }
@@ -143,7 +133,7 @@ export default class Node {
       newBoard[index - this.columns] = newBoard[index];
       newBoard[index] = temp;
 
-      let childNode = new Node(newBoard, this, -this.columns);
+      let childNode = new Node(newBoard, this.finalBoard, this, -this.columns);
       this.children.push(childNode);
     }
   }
@@ -158,7 +148,7 @@ export default class Node {
       newBoard[index + this.columns] = newBoard[index];
       newBoard[index] = temp;
 
-      let childNode = new Node(newBoard, this, this.columns);
+      let childNode = new Node(newBoard, this.finalBoard, this, this.columns);
       this.children.push(childNode);
     }
   }
@@ -180,21 +170,11 @@ export default class Node {
   }
 }
 
-const checkBoard = board => {
-  const finalBoard = getFinalBoard(board.length);
+const checkBoard = (board, finalBoard) => {
   for (let i = 0; i < board.length; i += 1) {
     if (board[i] !== finalBoard[i]) {
       return false;
     }
   }
   return true;
-};
-
-const getFinalBoard = boardSize => {
-  const board = [];
-  for (let i = 1; i < boardSize; i += 1) {
-    board[i - 1] = i;
-  }
-  board[boardSize - 1] = 0;
-  return board;
 };

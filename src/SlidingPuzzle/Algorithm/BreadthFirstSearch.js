@@ -4,9 +4,9 @@ import Node from './Node';
  * Run a search on the board
  * @param {*} board the root board - starting board
  */
-export function BreadthFirstSearch(board) {
+export function BreadthFirstSearch(board, finalBoard) {
   // convert the board to a Node
-  const root = new Node(board, null);
+  const root = new Node(board, finalBoard, null);
 
   // contains all of the nodes that lead to the actual solution
   const PathToSolution = [];
@@ -21,11 +21,12 @@ export function BreadthFirstSearch(board) {
   OpenList.push(root);
   let count = 0;
   // loop!
-  while (OpenList.length !== 0 && !goalFound && count < 100000) {
+  while (OpenList.length !== 0 && !goalFound && count < 5) {
     // remove the first Node from the open list
     let currentNode = OpenList.shift();
     // add the removed Node to the closed list
     ClosedList.push(currentNode);
+    console.log(count);
     count += 1;
 
     // expand the node - find the zero and apply all of the available moves
