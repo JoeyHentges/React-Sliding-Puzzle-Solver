@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Box from './Box';
-import { Run, EstimateMoves } from '../Algorithm/Algorithms';
+import { Run } from '../Algorithm/Algorithms';
 import { checkBoard, getFinalBoard } from '../Algorithm/Helpers';
 import Board from './Board';
 
@@ -15,9 +15,7 @@ class Puzzle extends Component {
       //animation true false - slows algorithm solving if true
       animation: false,
       animationSpeed: 10, // only matters if flase - if true, animation speed it fixed
-      animationActive: false,
-      // estimate
-      movesEstimate: EstimateMoves(board.getMatrix(), 'BruteForc')
+      animationActive: false
     };
   }
 
@@ -60,12 +58,6 @@ class Puzzle extends Component {
         )
       }));
     }
-
-    if (clickType === 'manual') {
-      this.setState({
-        movesEstimate: EstimateMoves(this.state.board.getMatrix(), 'BruteForc')
-      });
-    }
   };
 
   /**
@@ -92,7 +84,7 @@ class Puzzle extends Component {
   solve = algorithm => {
     if (this.state.animationActive) return;
     this.setState({ animationActive: true });
-    const boardCopy = this.state.board.getMatrix();
+    const boardCopy = this.state.board.getBoard();
     Run(this, boardCopy, algorithm);
   };
 
@@ -102,9 +94,7 @@ class Puzzle extends Component {
       (this.state.isWin ? 'Winner !!! ' : 'Total ') +
       `Moves: ${this.state.moves
         .toString()
-        .replace(/\B(?=(\d{3})+(?!\d))/g, ',')} | Estimate: ${
-        this.state.movesEstimate
-      }`;
+        .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}`;
     return (
       <>
         Slider Puzzle Solver {this.state.board.size}x{this.state.board.size}
@@ -177,7 +167,7 @@ class Puzzle extends Component {
             <button onClick={() => this.solve('BruteForce')}>
               Brute Force
             </button>
-            <button onClick={() => this.solve('BruteForce')}>
+            <button onClick={() => this.solve('BreadthFirstSearch')}>
               Breadth First Search
             </button>
           </div>
