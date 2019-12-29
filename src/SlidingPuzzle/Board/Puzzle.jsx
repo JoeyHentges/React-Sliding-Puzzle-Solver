@@ -19,17 +19,6 @@ class Puzzle extends Component {
     };
   }
 
-  newGame = () => {
-    document.getElementById('algorithm-result').innerHTML = '';
-    if (this.state.animationActive) return;
-    const board = new Board(this.props.size);
-    this.setState({
-      board,
-      moves: 0,
-      isWin: checkBoard(board.getBoard(), getFinalBoard(board.board.length))
-    });
-  };
-
   changeBoardSize = amount => {
     document.getElementById('algorithm-result').innerHTML = '';
     if (this.state.animationActive) return;
@@ -105,7 +94,13 @@ class Puzzle extends Component {
           {rows}
           <span className="slider-msg">{message}</span>
           <div className="btn-new-game">
-            <button onClick={this.newGame}>New Game</button>
+            <button
+              onClick={() => {
+                this.changeBoardSize(0);
+              }}
+            >
+              New Game
+            </button>
             <button
               onClick={() => {
                 this.changeBoardSize(1);

@@ -1,5 +1,5 @@
 import { Visualize } from '../Visualize/Visualize';
-import { BreadthFirstSearch } from './BreadthFirstSearch';
+import { BreadthFirstSearch } from './BreadthFirstSearch/BreadthFirstSearch';
 import { getFinalBoard } from './Helpers';
 
 export function Run(Puzzle, board, algorithm) {
