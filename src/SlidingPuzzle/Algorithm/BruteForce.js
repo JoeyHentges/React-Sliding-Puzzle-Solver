@@ -20,6 +20,9 @@ export function BruteForce(board) {
   }
 
   console.log(checkBoard(currentBoard, finalBoard), count);
+  if (!checkBoard(currentBoard, finalBoard)) {
+    BruteForce(board);
+  }
   return moves;
 }
 
