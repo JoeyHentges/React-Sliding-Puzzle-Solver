@@ -1,5 +1,3 @@
-import { getFinalBoard } from '../Helpers';
-
 /**
  * This is the node on the board.
  */
@@ -179,4 +177,15 @@ const checkBoard = board => {
     }
   }
   return true;
+};
+
+const getFinalBoard = boardSize => {
+  const board = [];
+  let current = 1;
+  for (let i = 0; i < boardSize - 1; i += 1) {
+    board[i] = current;
+    current += 1;
+  }
+  board[boardSize - 1] = 0;
+  return board;
 };

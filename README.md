@@ -1,30 +1,40 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Sliding Puzzle Solver (15/8 Puzzle)
 
-## Available Scripts
+A React project that solves sliding puzzles using Breadth First Search (Brute Force), and A\* searching algorithms.
 
-In the project directory, you can run:
+## Notes
 
-### `npm start`
+When running the algorithms, open the browser console (F12). You can view where the algorithms are in terms of loop counts.
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Both algorithms can take quite a bit of time to complete, and may not even find a solution due to stopping early. I set the algorithms to stop early because in the worst case it will check every possible board configuration which is equal to w^2! (w = number of rows/columns on the board).
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+## Features
 
-### `npm test`
+- [x] **[Node.JS](https://nodejs.org)** v10.x.x
+- [x] **[React](https://reactjs.org)** v16.x.x
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Usage
 
-### `npm run build`
+Install dependencies
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```
+$ npm install
+```
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+or
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```
+yarn
+```
 
-https://github.com/mikehn/react-slider-puzzle
+For development
+
+```bash
+$ npm start
+```
+
+To Deploy to GitHub Pages
+
+```bash
+$ npm run deploy
+```

@@ -1,5 +1,3 @@
-import { findOpenBox } from '../Algorithm/Helpers';
-
 export function Visualize(SliderPuzzle, moves) {
   if (!SliderPuzzle.state.animation) {
     VisualizeNoAnimation(SliderPuzzle, moves);
@@ -61,3 +59,18 @@ const getDirection = (currentRow, currentColumn, newRow, newColumn) => {
     return '';
   }
 };
+
+/**
+ * Find the row and column holding the 0 value.
+ * @param {*} board the slider board
+ */
+export function findOpenBox(board) {
+  for (let row = 0; row < board.length; row += 1) {
+    for (let column = 0; column < board.length; column += 1) {
+      if (board[row][column] === 0) {
+        return { row, column };
+      }
+    }
+  }
+  return null;
+}
