@@ -36,7 +36,7 @@ export default class Solver {
         }
       }
     }
-    return null;
+    return []; // return empty array - acts as no path found
   }
 
   sortQueue(queue) {

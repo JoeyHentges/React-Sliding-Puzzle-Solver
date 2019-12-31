@@ -19,9 +19,8 @@ export function BreadthFirstSearch(board) {
 
   // enqueue the root
   OpenList.push(root);
-  let count = 0;
-  // loop!
-  while (OpenList.length !== 0 && !goalFound && count < 100000) {
+  let count = 0; // don't allow the algorithm to go on forever (max 200,000 loops)
+  while (OpenList.length !== 0 && !goalFound && count < 200000) {
     // remove the first Node from the open list
     let currentNode = OpenList.shift();
     // add the removed Node to the closed list

@@ -3,6 +3,7 @@ import { AStar } from './AStar/AStar';
 import { BreadthFirstSearch } from './BreadthFirstSearch/BreadthFirstSearch';
 
 export function Run(Puzzle, boardObj, algorithm) {
+  const tempBoard = boardObj.getMatrix();
   let moves = [];
   switch (algorithm) {
     case 'AStar':
@@ -15,6 +16,7 @@ export function Run(Puzzle, boardObj, algorithm) {
       console.log('no algorithm');
       break;
   }
+  console.log(tempBoard);
   console.log(moves);
   if (moves.length > 0) {
     Visualize(Puzzle, moves);
