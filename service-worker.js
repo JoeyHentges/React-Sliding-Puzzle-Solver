@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/React-Sliding-Puzzle-Solver/precache-manifest.e66a79580d408185dd36417168899ff4.js"
+  "/React-Sliding-Puzzle-Solver/precache-manifest.6be21af1a324f2fd7114be9d48a38566.js"
 );
 
 self.addEventListener('message', (event) => {
