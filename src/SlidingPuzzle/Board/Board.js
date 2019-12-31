@@ -23,7 +23,6 @@ export default class Board {
   }
 
   getNewBoard(size) {
-    return [1, 6, 8, 7, 4, 5, 3, 0, 2];
     return scramble(Array.from({ length: size * size }, (_, b) => b));
   }
 
