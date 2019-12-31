@@ -1,7 +1,7 @@
 /**
  * This is the node on the board.
  */
-class Node {
+export default class Node {
   /**
    *
    * @param {*} board the current board of the node
@@ -19,13 +19,9 @@ class Node {
     }
   }
 
-  score() {
-    return this.G + this.H;
-  }
-
   // return a hashable representation of the node (this)
   state() {
-    return this.toString();
+    return this.board.board.toString();
   }
 
   // reconstruct a path from this node to the root (parent) node
@@ -42,20 +38,21 @@ class Node {
 
   // check if the board is solved
   solved() {
-    return this.board.solved;
+    return this.board.solved();
   }
 
   // accessible actions at the current state
   actions() {
-    return this.board.actions;
+    return this.board.actions();
   }
 
+  // get the number of misplaced tiles in the board
   H() {
-    return this.board.manhattan;
+    return this.board.manhattan();
   }
 
   F() {
-    return this.H + this.G;
+    return this.H() + this.G;
   }
 
   toString() {

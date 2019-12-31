@@ -23,8 +23,8 @@ export default class Board {
   }
 
   getNewBoard(size) {
-    return [1, 2, 3, 4, 0, 5, 7, 8, 6];
-    //return [1, 6, 2, 4, 9, 5, 3, 7, 0, 10, 11, 8, 13, 14, 15, 12];
+    //return [1, 2, 3, 4, 0, 5, 7, 8, 6];
+    return [1, 6, 2, 4, 9, 5, 3, 7, 0, 10, 11, 8, 13, 14, 15, 12];
     //return scramble(Array.from({ length: size * size }, (_, b) => b));
   }
 
@@ -35,6 +35,13 @@ export default class Board {
   setBoard(matrix) {
     this.board = matrixToBoard(matrix);
     this.matrix = matrix;
+  }
+
+  changeBoardSize(newSize) {
+    const board = this.getNewBoard(newSize);
+    this.board = board;
+    this.matrix = boardToMatrix(board);
+    this.size = newSize;
   }
 }
 

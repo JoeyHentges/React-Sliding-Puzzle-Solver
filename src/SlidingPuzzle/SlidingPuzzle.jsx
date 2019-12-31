@@ -12,7 +12,7 @@ export default class SlidingPizzle extends Component {
   render() {
     return (
       <div className="board">
-        <App size={3} solve={this.solve}></App>
+        <App size={4} solve={this.solve}></App>
       </div>
     );
   }

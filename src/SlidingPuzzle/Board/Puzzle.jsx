@@ -24,11 +24,13 @@ class Puzzle extends Component {
     if (this.state.animationActive) return;
     const newSize = this.state.board.size + amount;
     if (newSize < 3 || newSize > 10) return;
-    const board = new Board(newSize);
+    this.state.board.changeBoardSize(newSize);
     this.setState({
-      board,
       moves: 0,
-      isWin: checkBoard(board.getBoard(), getFinalBoard(board.board.length))
+      isWin: checkBoard(
+        this.state.board.getBoard(),
+        getFinalBoard(this.state.board.board.length)
+      )
     });
   };
 
@@ -75,8 +77,7 @@ class Puzzle extends Component {
   solve = algorithm => {
     if (this.state.animationActive) return;
     this.setState({ animationActive: true });
-    const boardCopy = this.state.board.getBoard();
-    Run(this, boardCopy, algorithm);
+    Run(this, this.state.board, algorithm);
   };
 
   render() {
@@ -162,11 +163,9 @@ class Puzzle extends Component {
             </button>
           </div>
           <div className="btn-new-game smaller">
-            <button onClick={() => this.solve('BruteForce')}>
-              Brute Force
-            </button>
+            <button onClick={() => this.solve('AStar')}>A-Star</button>
             <button onClick={() => this.solve('BreadthFirstSearch')}>
-              Breadth First Search
+              Brute Force
             </button>
           </div>
         </div>

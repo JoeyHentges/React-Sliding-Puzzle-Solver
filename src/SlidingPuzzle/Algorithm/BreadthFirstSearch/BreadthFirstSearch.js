@@ -50,8 +50,7 @@ export function BreadthFirstSearch(board) {
       }
     }
   }
-  console.log('done');
-  return PathToSolution;
+  return convertMoves(PathToSolution);
 }
 
 /**
@@ -83,4 +82,25 @@ const tracePath = (path, node) => {
     current = current.parent;
     path.unshift(current);
   }
+};
+
+// convert the given list of 'moves' to x/y coordinates
+const convertMoves = moves => {
+  const xy = [];
+  let lastBoard = moves[0];
+  const numRowsColumns = moves[0].columns;
+  for (let i = 1; i < moves.length; i += 1) {
+    const movedBox = lastBoard.zeroIndex + moves[i].moveAmount;
+    const temp = convertIndexToXY(numRowsColumns, movedBox);
+    xy.push(temp);
+    lastBoard = moves[i];
+  }
+  return xy;
+};
+
+const convertIndexToXY = (numRowsColumns, index) => {
+  return {
+    row: Math.floor(index / numRowsColumns),
+    column: index % numRowsColumns
+  };
 };
