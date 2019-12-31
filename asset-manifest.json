@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/React-Sliding-Puzzle-Solver/static/css/main.b1ff6285.chunk.css",
-    "main.js": "/React-Sliding-Puzzle-Solver/static/js/main.7238ebb1.chunk.js",
-    "main.js.map": "/React-Sliding-Puzzle-Solver/static/js/main.7238ebb1.chunk.js.map",
+    "main.css": "/React-Sliding-Puzzle-Solver/static/css/main.6edfce4c.chunk.css",
+    "main.js": "/React-Sliding-Puzzle-Solver/static/js/main.1b7a42d0.chunk.js",
+    "main.js.map": "/React-Sliding-Puzzle-Solver/static/js/main.1b7a42d0.chunk.js.map",
     "runtime-main.js": "/React-Sliding-Puzzle-Solver/static/js/runtime-main.36c6ff53.js",
     "runtime-main.js.map": "/React-Sliding-Puzzle-Solver/static/js/runtime-main.36c6ff53.js.map",
     "static/js/2.a0b80519.chunk.js": "/React-Sliding-Puzzle-Solver/static/js/2.a0b80519.chunk.js",
     "static/js/2.a0b80519.chunk.js.map": "/React-Sliding-Puzzle-Solver/static/js/2.a0b80519.chunk.js.map",
     "index.html": "/React-Sliding-Puzzle-Solver/index.html",
-    "precache-manifest.dbc60ea3bef4942f47fc575dd1da9122.js": "/React-Sliding-Puzzle-Solver/precache-manifest.dbc60ea3bef4942f47fc575dd1da9122.js",
+    "precache-manifest.e66a79580d408185dd36417168899ff4.js": "/React-Sliding-Puzzle-Solver/precache-manifest.e66a79580d408185dd36417168899ff4.js",
     "service-worker.js": "/React-Sliding-Puzzle-Solver/service-worker.js",
-    "static/css/main.b1ff6285.chunk.css.map": "/React-Sliding-Puzzle-Solver/static/css/main.b1ff6285.chunk.css.map",
+    "static/css/main.6edfce4c.chunk.css.map": "/React-Sliding-Puzzle-Solver/static/css/main.6edfce4c.chunk.css.map",
     "static/js/2.a0b80519.chunk.js.LICENSE": "/React-Sliding-Puzzle-Solver/static/js/2.a0b80519.chunk.js.LICENSE"
   },
   "entrypoints": [
     "static/js/runtime-main.36c6ff53.js",
     "static/js/2.a0b80519.chunk.js",
-    "static/css/main.b1ff6285.chunk.css",
-    "static/js/main.7238ebb1.chunk.js"
+    "static/css/main.6edfce4c.chunk.css",
+    "static/js/main.1b7a42d0.chunk.js"
   ]
 }

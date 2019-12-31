@@ -1,11 +1,11 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "db11e098bd7568fad2c8bc7519eeac62",
+    "revision": "68967b99b8b784a1bd05faba3e105a74",
     "url": "/React-Sliding-Puzzle-Solver/index.html"
   },
   {
-    "revision": "c36831478aa497ece2be",
-    "url": "/React-Sliding-Puzzle-Solver/static/css/main.b1ff6285.chunk.css"
+    "revision": "3c4f419cca77a0a53afa",
+    "url": "/React-Sliding-Puzzle-Solver/static/css/main.6edfce4c.chunk.css"
   },
   {
     "revision": "b33b7d8b13f71dd36987",
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/React-Sliding-Puzzle-Solver/static/js/2.a0b80519.chunk.js.LICENSE"
   },
   {
-    "revision": "c36831478aa497ece2be",
-    "url": "/React-Sliding-Puzzle-Solver/static/js/main.7238ebb1.chunk.js"
+    "revision": "3c4f419cca77a0a53afa",
+    "url": "/React-Sliding-Puzzle-Solver/static/js/main.1b7a42d0.chunk.js"
   },
   {
     "revision": "57ca978872eaeff4e9ac",
