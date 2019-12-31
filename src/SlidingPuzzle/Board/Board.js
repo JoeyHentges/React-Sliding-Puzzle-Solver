@@ -1,5 +1,3 @@
-import { getNeighbors } from '../Algorithm/Helpers';
-
 const EMPTY = 0;
 
 export default class Board {
@@ -25,6 +23,7 @@ export default class Board {
   }
 
   getNewBoard(size) {
+    return [1, 6, 8, 7, 4, 5, 3, 0, 2];
     return scramble(Array.from({ length: size * size }, (_, b) => b));
   }
 
@@ -35,6 +34,13 @@ export default class Board {
   setBoard(matrix) {
     this.board = matrixToBoard(matrix);
     this.matrix = matrix;
+  }
+
+  changeBoardSize(newSize) {
+    const board = this.getNewBoard(newSize);
+    this.board = board;
+    this.matrix = boardToMatrix(board);
+    this.size = newSize;
   }
 }
 
@@ -65,7 +71,7 @@ const matrixToBoard = matrix => {
   let count = 0;
   for (let row = 0; row < matrix.length; row += 1) {
     for (let column = 0; column < matrix.length; column += 1) {
-      board.push(matrix[count]);
+      board.push(matrix[row][column]);
       count += 1;
     }
   }
@@ -109,4 +115,37 @@ const moveHelper = (board, zero, row, column) => {
   newBoard[zero.row][zero.column] = newBoard[row][column];
   newBoard[row][column] = EMPTY;
   return newBoard;
+};
+
+const getNeighbors = (board, row, column) => {
+  const neighbors = [];
+  if (board[row - 1] !== undefined && board[row - 1][column] !== undefined)
+    neighbors.push({
+      value: board[row - 1][column],
+      row: row - 1,
+      column: column
+    });
+
+  if (board[row + 1] !== undefined && board[row + 1][column] !== undefined)
+    neighbors.push({
+      value: board[row + 1][column],
+      row: row + 1,
+      column: column
+    });
+
+  if (board[row][column - 1] !== undefined)
+    neighbors.push({
+      value: board[row][column - 1],
+      row: row,
+      column: column - 1
+    });
+
+  if (board[row][column + 1] !== undefined)
+    neighbors.push({
+      value: board[row][column + 1],
+      row: row,
+      column: column + 1
+    });
+
+  return neighbors;
 };

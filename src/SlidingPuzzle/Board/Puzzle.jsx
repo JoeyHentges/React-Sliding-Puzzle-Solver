@@ -11,36 +11,33 @@ class Puzzle extends Component {
     this.state = {
       board,
       moves: 0,
-      isWin: checkBoard(board.getMatrix(), getFinalBoard(board.size)),
+      isWin: checkBoard(board.getBoard(), getFinalBoard(board.board.length)),
       //animation true false - slows algorithm solving if true
       animation: false,
-      animationSpeed: 100 // only matters if flase - if true, animation speed it fixed
+      animationSpeed: 10, // only matters if flase - if true, animation speed it fixed
+      animationActive: false
     };
   }
 
-  newGame = () => {
-    const board = new Board(this.props.size);
-    this.setState({
-      board,
-      moves: 0,
-      isWin: checkBoard(board.getMatrix(), getFinalBoard(board.size))
-    });
-  };
-
   changeBoardSize = amount => {
+    document.getElementById('algorithm-result').innerHTML = '';
+    if (this.state.animationActive) return;
     const newSize = this.state.board.size + amount;
     if (newSize < 3 || newSize > 10) return;
-    const board = new Board(newSize);
+    this.state.board.changeBoardSize(newSize);
     this.setState({
-      board,
       moves: 0,
-      isWin: checkBoard(board.getMatrix(), getFinalBoard(board.size))
+      isWin: checkBoard(
+        this.state.board.getBoard(),
+        getFinalBoard(this.state.board.board.length)
+      )
     });
   };
 
   //note declaring class function as an arrow function gives us automatic 'this' binding.
   // in y, x
-  move = (column, row) => {
+  move = (column, row, clickType) => {
+    if (clickType === 'manual' && this.state.animationActive) return;
     if (this.state.isWin) return;
 
     const newMoveInfo = this.state.board.makeMove(row, column);
@@ -49,8 +46,8 @@ class Puzzle extends Component {
       this.setState(prevState => ({
         moves: prevState.moves + 1,
         isWin: checkBoard(
-          this.state.board.getMatrix(),
-          getFinalBoard(this.state.board.size)
+          this.state.board.getBoard(),
+          getFinalBoard(this.state.board.board.length)
         )
       }));
     }
@@ -70,31 +67,41 @@ class Puzzle extends Component {
             boxNumber={bNum}
             row={j}
             column={i}
-            onClick={() => this.move(i, j)}
+            onClick={() => this.move(i, j, 'manual')}
           />
         ))}
       </div>
     );
   };
 
-  solve = () => {
-    const boardCopy = this.state.board.getMatrix();
-    Run(this, boardCopy, 'BruteForce');
+  solve = algorithm => {
+    if (this.state.animationActive) return;
+    this.setState({ animationActive: true });
+    Run(this, this.state.board, algorithm);
   };
 
   render() {
     let rows = this.state.board.getMatrix().map(this.getRow);
     let message =
       (this.state.isWin ? 'Winner !!! ' : 'Total ') +
-      `Moves: ${this.state.moves}`;
+      `Moves: ${this.state.moves
+        .toString()
+        .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}`;
     return (
       <>
+        <span className="slider-msg-3" id="algorithm-result"></span>
         Slider Puzzle Solver {this.state.board.size}x{this.state.board.size}
         <div className="slider-board">
           {rows}
           <span className="slider-msg">{message}</span>
           <div className="btn-new-game">
-            <button onClick={this.newGame}>New Game</button>
+            <button
+              onClick={() => {
+                this.changeBoardSize(0);
+              }}
+            >
+              New Game
+            </button>
             <button
               onClick={() => {
                 this.changeBoardSize(1);
@@ -111,11 +118,11 @@ class Puzzle extends Component {
             </button>
           </div>
           <span className="slider-msg-2">
-            Solve Speed: {this.state.animationSpeed}
+            Solve Speed: {10000 - this.state.animationSpeed + 10}
           </span>
           <div>
             <button
-              class="speed-change-btn"
+              className="speed-change-btn"
               onClick={() => {
                 this.setState(prevState => ({
                   animationSpeed:
@@ -127,10 +134,10 @@ class Puzzle extends Component {
                 }));
               }}
             >
-              Increase
+              Decrease
             </button>
             <button
-              class="speed-change-btn"
+              className="speed-change-btn"
               onClick={() => {
                 this.setState(prevState => ({
                   animation: !prevState.animation
@@ -140,7 +147,7 @@ class Puzzle extends Component {
               Animation Active: {this.state.animation.toString().toUpperCase()}
             </button>
             <button
-              class="speed-change-btn"
+              className="speed-change-btn"
               onClick={() => {
                 this.setState(prevState => ({
                   animationSpeed:
@@ -152,12 +159,14 @@ class Puzzle extends Component {
                 }));
               }}
             >
-              Decrease
+              Increase
             </button>
           </div>
           <div className="btn-new-game smaller">
-            <button onClick={this.solve}>Brute Force</button>
-            <button onClick={this.solve}>Breadth First Search</button>
+            <button onClick={() => this.solve('AStar')}>A-Star</button>
+            <button onClick={() => this.solve('BreadthFirstSearch')}>
+              Brute Force
+            </button>
           </div>
         </div>
       </>
